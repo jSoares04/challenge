@@ -32,7 +32,7 @@ public class MetricsService {
     private static final long TIME_WINDOW = 60 * 60 * 1000; // 60 minutes in milliseconds
     private final Set<Long> knownLineIds = Set.of(10L, 20L, 30L, 40L, 50L, 60l, 70L, 80L); // Example line IDs
     private final Map<Long, NavigableMap<Long, SpeedMeasurement>> lineData = new ConcurrentHashMap<>();
-    private final Map<Long, RollingMetrics> metricsMap = new ConcurrentHashMap<>();
+    protected final Map<Long, RollingMetrics> metricsMap = new ConcurrentHashMap<>();
     private final Map<Long, Lock> lineLocks = new ConcurrentHashMap<>();
     private final Map<Long, Long> olderEntries = new ConcurrentHashMap<>();
 
