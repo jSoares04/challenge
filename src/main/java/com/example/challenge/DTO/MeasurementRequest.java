@@ -1,4 +1,4 @@
-package com.example.challenge.DTO;
+package com.example.challenge.dto;
 
 public class MeasurementRequest {
     private Long lineId;

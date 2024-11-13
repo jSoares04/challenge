@@ -1,4 +1,4 @@
-package com.example.challenge.Controllers;
+package com.example.challenge.controllers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,10 +8,10 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.example.challenge.DTO.MeasurementRequest;
-import com.example.challenge.DTO.SpeedMetricsResponse;
-import com.example.challenge.Domain.RollingMetrics;
-import com.example.challenge.Domain.SpeedMeasurement;
+import com.example.challenge.dto.MeasurementRequest;
+import com.example.challenge.dto.SpeedMetricsResponse;
+import com.example.challenge.domain.RollingMetrics;
+import com.example.challenge.domain.SpeedMeasurement;
 
 import java.util.NavigableMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;

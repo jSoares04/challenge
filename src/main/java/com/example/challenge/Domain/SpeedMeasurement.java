@@ -1,4 +1,4 @@
-package com.example.challenge.Domain;
+package com.example.challenge.domain;
 
 public class SpeedMeasurement {
     private final long timestamp;

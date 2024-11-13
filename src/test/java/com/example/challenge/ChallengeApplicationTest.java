@@ -8,13 +8,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.example.challenge.DTO.MeasurementRequest;
+import com.example.challenge.dto.MeasurementRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -276,7 +277,7 @@ class ChallengeApplicationTest {
 		            .andExpect(jsonPath("$.max").exists())
 		            .andExpect(jsonPath("$.min").exists());
 		}
-  }
+	}
 
     // Helper method to add measurement via mock request
     private void addMeasurement(Long lineId, double speed, long timestamp) throws Exception {
@@ -289,5 +290,25 @@ class ChallengeApplicationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isCreated());
+    }
+    
+    @Test
+    void testRemoveOldEntriesSheduled_Success() throws Exception {
+        // Add some measurements
+        addMeasurement(80L, 100.0, currentTimestamp - 59 * 60 * 1000 - 56 * 1000); // 59 minutes 56 seconds ago
+       
+        //fetch metrics, the measurement shoud return
+        mockMvc.perform(get("/api/metrics/80"))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.avg").value(100.0))
+        .andExpect(jsonPath("$.max").value(100.0))
+        .andExpect(jsonPath("$.min").value(100.0));
+        
+        //sleep 5 seconds to allow the schedule to run and remove the old entry
+        TimeUnit.SECONDS.sleep(5);
+        // Fetch metrics, should receive a not found because the measure was removed by schedule
+        mockMvc.perform(get("/api/metrics/80"))
+            .andExpect(status().isNotFound());
+
     }
 }

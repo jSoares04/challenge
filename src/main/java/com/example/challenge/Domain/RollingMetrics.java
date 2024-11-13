@@ -1,4 +1,4 @@
-package com.example.challenge.Domain;
+package com.example.challenge.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
