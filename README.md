@@ -43,16 +43,16 @@ Key Features:
 ### Build and Run
 
 1. Clone the repository:
-```bash
-   git clone https://github.com/your-repo/metrics-service.git
-   cd challenge
-```
+	```bash
+   		git clone https://github.com/your-repo/metrics-service.git
+   		cd challenge
+	```
 2. Build the application:
-   ```bash
+	```bash
 	mvn clean install
 	```
 3. Run the application:
-   ```bash
+	```bash
 	mvn spring-boot:run
 	```
 	
@@ -93,6 +93,47 @@ Retrieves metrics (weighted average, max, and min speeds) for a specific line.
 
 * 404 NOT FOUND: No data available for the specified lineId.
 
+### Get Metrics for All Lines ###
 
+GET /api/metrics
 
-    
+Retrieves aggregated metrics for all lines with available data.
+
+* Responses:
+	* 200 OK: Aggregated metrics retrieved successfully.
+	```javascript
+ 	[
+	  {
+	    "lineId": 10,
+	    "avg": 120.0,
+	    "max": 150.0,
+	    "min": 90.0
+	  },
+	  {
+	    "lineId": 20,
+	    "avg": 130.0,
+	    "max": 160.0,
+	    "min": 100.0
+	  }
+	]
+	```
+
+### Testing
+
+The project includes comprehensive unit tests using Mockito and JUnit 5.
+**Running Tests**
+
+To run the tests, execute:
+
+	mvn test
+
+**Test Coverage**
+
+1. Controller Tests:
+	* Validate request handling for all endpoints.
+	* Test edge cases like invalid lineId and outdated timestamps.
+
+2. Service Tests:
+	* Test metrics recalculation logic.
+	* Verify scheduled task behavior.
+	* Mock dependencies to isolate business logic.
