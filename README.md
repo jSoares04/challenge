@@ -18,8 +18,6 @@ Key Features:
 3. [Endpoints](#endpoints)
 4. [Scheduled Tasks](#scheduled-tasks)
 5. [Testing](#testing)
-6. [Future Improvements](#future-improvements)
-
 ---
 
 ## Technologies Used
@@ -117,6 +115,14 @@ Retrieves aggregated metrics for all lines with available data.
 	  }
 	]
 	```
+
+### Scheduled Tasks
+**Remove Outdated Entries**
+
+The application includes a scheduled task to remove outdated entries from the metrics data.
+
+* Runs every 5 seconds.
+* Ensures that only data within the 60-minute window is retained.
 
 ### Testing
 
