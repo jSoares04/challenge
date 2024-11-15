@@ -59,51 +59,40 @@ Key Features:
 4. The API will be available at: <http://localhost:8080/api>
 
 ## Endpoints
-### Add Speed Measurement###
-
-Endpoints
-Add Speed Measurement
-
-POST /api/linespeed
-
+### Add Speed Measurement ###
+	POST /api/linespeed
 Adds a speed measurement for a specific line. Validates the timestamp and line ID.
+* Request Body:
 
-   Request Body:
+		{
+		  "lineId": 10,
+		  "timestamp": 1696600000000,
+		  "speed": 120.5
+		}
 
-{
-  "lineId": 10,
-  "timestamp": 1696600000000,
-  "speed": 120.5
-}
-
-Responses:
-
-    201 CREATED: Measurement added successfully.
-    204 NO CONTENT: Measurement timestamp is older than the 60-minute window.
-    404 NOT FOUND: The lineId does not exist.
+* Responses:
+	* 201 CREATED: Measurement added successfully.
+	* 204 NO CONTENT: Measurement timestamp is older than the 60-minute window.
+	* 404 NOT FOUND: The lineId does not exist.
     
-###Get Metrics for a Specific Line###
+### Get Metrics for a Specific Line ###
 
 GET /api/metrics/{lineid}
 
 Retrieves metrics (weighted average, max, and min speeds) for a specific line.
 * Path Parameters:
-*   	lineid: The ID of the line (e.g., 10).
-
-
+	* lineid: The ID of the line (e.g., 10).
 * Responses:
   * 200 OK: Metrics retrieved successfully
-
-        {
-          "avg": 120.0,
-          "max": 150.0,
-          "min": 90.0
-        }
+  
+		{
+		  "avg": 120.0,
+		  "max": 150.0,
+		  "min": 90.0
+		}
 
 * 404 NOT FOUND: No data available for the specified lineId.
 
-* Path Parameters:
-             * lineid: The ID of the line (e.g., 10).
 
 
     
